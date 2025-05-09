@@ -1,74 +1,87 @@
+<template>
+  <v-app id="inspire">
+
+    <v-app-bar app height="90">
+      <v-app-bar-nav-icon
+          @click="drawer = !drawer">
+
+      </v-app-bar-nav-icon>
+
+      <v-toolbar-title>Product Manager
+      </v-toolbar-title>
+
+      <v-text-field
+          class="mt-7 ml-10 mr-5"
+          hide-details
+          placeholder="Search..."
+          variant="outlined"
+          density="compact"
+      ></v-text-field>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer">
+      <v-sheet
+          class="pa-4"
+          color="grey-lighten-4"
+      >
+        <v-avatar
+            class="mb-4"
+            color="grey-darken-1"
+            size="64"
+        ></v-avatar>
+
+        <div>john@google.com</div>
+      </v-sheet>
+
+      <v-divider></v-divider>
+
+      <v-list>
+        <v-list-item
+            v-for="[icon, text] in links"
+            :key="icon"
+            :prepend-icon="icon"
+            :title="text"
+            link
+        ></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main>
+      <v-container
+          class="py-8 px-6"
+          fluid
+      >
+
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
 <script setup>
-import {useField, useForm} from "vee-validate";
-import {toFormValidator} from '@vee-validate/zod';
-import {z} from 'zod';
+import {ref} from 'vue'
 
-// Define validations
-const validations = z.object({
-  name: z.string().min(1, "Name is required"),
-  price: z.number({
-    invalid_type_error: "Price must be a number",
-  }).min(3, "Price must be at least 3"),
-  description: z.string().max(125, "Description must be 125 characters or less"),
-});
+const cards = ['Today', 'Yesterday']
+const links = [
+  ['mdi-inbox-arrow-down', 'Inbox'],
+  ['mdi-send', 'Send'],
+  ['mdi-delete', 'Trash'],
+  ['mdi-alert-octagon', 'Spam'],
+]
 
-// Initialize form
-const {handleSubmit, errors} = useForm({
-  validationSchema: toFormValidator(validations),
-  initialValues: {
-    name: '',
-    price: undefined,
-    description: ''
-  }
-});
-
-// Register fields - names must match schema keys
-const {value: name} = useField('name');
-const {value: price} = useField('price', undefined, {
-  // Transform string input to number
-  transform: (value) => value === '' ? undefined : Number(value)
-});
-const {value: description} = useField('description');
-
-const onSubmit = handleSubmit((values) => {
-  console.log(validations.parse(values));
-});
-
-
+const drawer = ref(null)
 </script>
 
-<template>
-  <form @submit.prevent="onSubmit" style="max-width: 500px; margin: 0 auto;">
-    <label for="name" style="display: block; margin-bottom: 8px;">Name:</label>
-    <input type="text" id="name" v-model="name" style="width: 100%; padding: 8px; margin-bottom: 4px;"/>
-    <span v-if="errors.name" style="color: red">{{ errors.name }}</span>
-
-    <label for="price" style="display: block; margin-top: 16px;">Price:</label>
-    <input type="number" id="price" v-model="price" style="width: 100%; padding: 8px; margin-bottom: 4px;"/>
-    <span v-if="errors.price" style="color: red">{{ errors.price }}</span>
-
-    <label for="description" style="display: block; margin-top: 16px;">Description:</label>
-    <textarea id="description" v-model="description" style="width: 100%; padding: 8px; margin-bottom: 4px;"></textarea>
-    <span v-if="errors.description" style="color: red">{{ errors.description }}</span>
-
-    <button type="submit"
-            style="margin-top: 20px; padding: 8px 16px; background-color: #646cff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-      Submit
-    </button>
-  </form>
-
-
-  <v-data-table
-      :headers="[{ value: 'name', text: 'Name' }, { value: 'price', text: 'Price' }, { value: 'description', text: 'Description' }]"
-      :items="[{ name: 'test 1', price: 10, description: 'test 1' }, { name: 'test 2', price: 20, description: 'test 2' }]"
-      class="elevation-1"
-  >
-    <template v-slot:item="{ item }">
-      <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.description }}</td>
-      </tr>
-    </template>
-  </v-data-table>
-</template>
+<script>
+export default {
+  data: () => ({
+    cards: ['Today', 'Yesterday'],
+    drawer: null,
+    links: [
+      ['mdi-inbox-arrow-down', 'Inbox'],
+      ['mdi-send', 'Send'],
+      ['mdi-delete', 'Trash'],
+      ['mdi-alert-octagon', 'Spam'],
+    ],
+  }),
+}
+</script>
