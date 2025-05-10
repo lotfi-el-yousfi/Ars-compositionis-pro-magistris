@@ -2,24 +2,25 @@
   <v-sheet border rounded>
     <v-data-table
         :headers="headers"
-        :hide-default-footer="books.length < 11"
-        :items="books"
+        :hide-default-footer="products.length < 11"
+        :items="products"
     >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>
             <v-icon color="medium-emphasis" icon="mdi-book-multiple" size="x-small" start></v-icon>
 
-            Popular books
+            Popular products
           </v-toolbar-title>
 
           <v-btn
               class="me-2"
               prepend-icon="mdi-plus"
               rounded="lg"
-              text="Add a Book"
+              text="Add a Product"
               border
-              @click="add"
+              @click="router.push( {name :'EditProduct'})"
+
           ></v-btn>
         </v-toolbar>
       </template>
@@ -69,11 +70,13 @@
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-select v-model="record.genre" :items="['Fiction', 'Dystopian', 'Non-Fiction', 'Sci-Fi']" label="Genre"></v-select>
+            <v-select v-model="record.genre" :items="['Fiction', 'Dystopian', 'Non-Fiction', 'Sci-Fi']"
+                      label="Genre"></v-select>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-number-input v-model="record.year" :max="adapter.getYear(adapter.date())" :min="1" label="Year"></v-number-input>
+            <v-number-input v-model="record.year" :max="adapter.getYear(adapter.date())" :min="1"
+                            label="Year"></v-number-input>
           </v-col>
 
           <v-col cols="12" md="6">
@@ -93,50 +96,78 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
-</template><script setup>
-import { onMounted, ref, shallowRef } from 'vue'
+</template>
+<script setup>
 
 
-const books = ref([])
+
+
+
+import {onMounted, ref, shallowRef} from 'vue'
+import {useProductStore} from "@/product/store/ProductStore.ts";
+import {storeToRefs} from "pinia";
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
+const store = useProductStore()
+const {
+  products,
+  isLoading,
+  error,
+  loadAllProducts
+} = storeToRefs(useProductStore());
+
+
+
+
+
+
+
 const dialog = shallowRef(false)
 const isEditing = shallowRef(false)
 
 const headers = [
-  { title: 'Title', key: 'title', align: 'start' },
-  { title: 'Author', key: 'author' },
-  { title: 'Genre', key: 'genre' },
-  { title: 'Year', key: 'year', align: 'end' },
-  { title: 'Pages', key: 'pages', align: 'end' },
-  { title: 'Actions', key: 'actions', align: 'end', sortable: false },
+
+
+  {title: "id", key: "id"},
+  {title: "name", key: "name"},
+  {title: "price", key: "price"},
+  {title: "description", key: "description"},
+  {title: "quantity", key: "quantity"},
+  {title: "image", key: "image"},
 ]
 
-onMounted(() => {
-  reset()
-})
 
-function add () {
+onMounted(async () => {
+      reset()
+      await store.dispatch_loadAllProducts()
+
+    }
+)
+
+function add() {
 
 }
 
-function edit (id) {
+function edit(id) {
   isEditing.value = true
 
-  const found = books.value.find(book => book.id === id)
+  const found = products.value.find(book => book.id === id)
 
 
   dialog.value = true
 }
 
-function remove (id) {
-  const index = books.value.findIndex(book => book.id === id)
-  books.value.splice(index, 1)
+function remove(id) {
+  const index = products.value.findIndex(book => book.id === id)
+  products.value.splice(index, 1)
 }
 
-function save () {
+function save() {
 
 }
 
-function reset () {
+function reset() {
 
 }
 </script>

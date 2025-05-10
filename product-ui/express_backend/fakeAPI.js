@@ -13,46 +13,436 @@ app.use(bodyParser.json());
 const users = [{id: 1, username: 'admin', password: 'admin'}];
 const tokens = new Set();
 const products = [
+
     {
-        id: 1,
-        name: 'Laptop',
-        price: 1200,
-        description: 'A brand new laptop',
-        quantity: 10,
-        image: 'https://picsum.photos/200/300'
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
+    }, {
+        id: Math.floor(Math.random() * (5000 - 5 + 1)) + 5,
+        name: Array(Math.floor(Math.random() * (20 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        price: Math.floor(Math.random() * (5000 - 1 + 1)) + 1,
+        description: Array(Math.floor(Math.random() * (50 - 5 + 1)) + 5).fill('').map(() => String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97)).join(''),
+        quantity: Math.floor(Math.random() * (15 - 1 + 1)) + 1,
+        image: `https://picsum.photos/200/300?${Math.floor(Math.random() * (100 - 1 + 1)) + 1}`
     },
-    {
-        id: 2,
-        name: 'Phone',
-        price: 800,
-        description: 'A brand new phone',
-        quantity: 20,
-        image: 'https://picsum.photos/200/300?2'
-    },
-    {
-        id: 3,
-        name: 'Watch',
-        price: 150,
-        description: 'A brand new watch',
-        quantity: 5,
-        image: 'https://picsum.photos/200/300?3'
-    },
-    {
-        id: 4,
-        name: 'Tablet',
-        price: 500,
-        description: 'A brand new tablet',
-        quantity: 15,
-        image: 'https://picsum.photos/200/300?4'
-    },
-    {
-        id: 5,
-        name: 'TV',
-        price: 3000,
-        description: 'A brand new TV',
-        quantity: 2,
-        image: 'https://picsum.photos/200/300?5'
-    }
+
 ];
 
 const SECRET_KEY = 'your_secret_key';

@@ -14,5 +14,10 @@ export default defineConfig({
         alias: {
             "@": fileURLToPath(new URL("./src", import.meta.url)),
         },
+    },
+    server: {
+        fs: {
+            allow: ['..'] // Allow serving files from one level up to fix alias issues
+        }
     }
 })

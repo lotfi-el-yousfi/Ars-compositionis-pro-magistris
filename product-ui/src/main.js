@@ -10,7 +10,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import * as labs from 'vuetify/labs/components'  // Add this line
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import {createPinia} from "pinia";
-import router from "./router";
+import router from "./router/router.ts";
 
 const pinia = createPinia()
 

@@ -1,17 +1,19 @@
 import axios from "../../../config/AxiosConfiguration";
- import {IProducts} from "../../model/IProduct";
+import {IProduct} from "../../model/IProduct.ts";
 
 function handelError(err?: any) {
     throw Error(err)
 }
 
 
+export const fetchAllProducts = async (): Promise<IProduct[]> => {
 
-export const getAllProducts = async (): Promise<IProducts[]> => {
-    try {
-        const response = await axios.get<IProducts[]>('/api/products');
-        return response.data;
-    } catch (error) {
-        handelError(error);
-    }
+    const response = await axios.get<IProduct[]>('/products');
+    return response.data;
+
+};
+export const updateProduct = async (product: IProduct): Promise<IProduct> => {
+
+    const response = await axios.post<IProduct>('/products', product);
+    return response.data;
 };
