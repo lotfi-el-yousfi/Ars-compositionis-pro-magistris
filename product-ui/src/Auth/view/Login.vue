@@ -1,49 +1,36 @@
 <template>
-  <v-card class="mx-auto" max-width="400">
-    <v-alert v-if="error" color="red" icon="mdi-alert-outline"
-             text="Error">{{ error }}
-    </v-alert>
-    <v-form @submit.prevent="onSubmit">
-      <v-text-field
-          class="mx-5 my-5"
-          v-model="username"
-          label="Email"
-          type="email"
-          :error-messages="emailErrors"
-          required
-      ></v-text-field>
-      <v-text-field
-          class="mx-5 my-5"
-          v-model="password"
-          label="Password"
-          type="password"
-          :error-messages="passwordErrors"
-          required
-      ></v-text-field>
-      <v-btn class="mx-5 my-5" type="submit" color="primary" :disabled="isLoading">Login</v-btn>
-      <p v-if="error" class="red--text">{{ error }}</p>
-    </v-form>
-  </v-card>
+  <v-form @submit.prevent="handleSubmit">
+    <v-text-field v-model="username" label="Username" required></v-text-field>
+    <v-text-field v-model="email" label="Email" required type="email"></v-text-field>
+    <v-text-field v-model="password" label="Password" required type="password"></v-text-field>
+
+    <v-btn type="submit" :loading="isLoading">Update Profile</v-btn>
+
+    <v-alert v-if="error" type="error">{{ error }}</v-alert>
+    <v-alert v-if="success" type="success">The user has been updated</v-alert>
+  </v-form>
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import {useAuthStore} from '@/Auth/store/AuthStore.ts'
-import {useRouter} from 'vue-router';
+import {ref, computed} from 'vue';
+import {useAuthStore} from '@/store/AuthStore';
+import {UserProfile} from '@/model/IUser';
 
-const router = useRouter();
+const authStore = useAuthStore();
+const {user, isLoading, error, success, dispatch_UpdateUser} = authStore;
 
-const authStore = (useAuthStore())
+const username = ref(user?.username || '');
+const email = ref(user?.email || '');
+const password = ref(user?.password || '');
 
+const handleSubmit = async () => {
+  const updatedUser: UserProfile = {
+    id: user?.id,
+    username: username.value,
+    email: email.value,
+    password: password.value,
+  };
 
-const username = ref("admin")
-const password = ref("admin")
-
-const onSubmit = async () => {
-  await authStore.login(username.value, password.value)
-
-  router.push({name: 'ProductList'});
-}
-
+  await dispatch_UpdateUser(updatedUser);
+};
 </script>
- 

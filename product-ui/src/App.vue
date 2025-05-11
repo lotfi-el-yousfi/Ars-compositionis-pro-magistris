@@ -1,4 +1,5 @@
 <template>
+
   <v-app id="inspire">
 
     <v-app-bar app height="90">
@@ -69,13 +70,13 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {ref, watch, watchEffect} from 'vue'
 import {useAuthStore} from './Auth/store/AuthStore.ts'
-
-const authStore = useAuthStore()
-const {isLoggedIn}=storeToRefs( useAuthStore())
 import {useRouter} from 'vue-router';
 import {storeToRefs} from "pinia";
+
+const authStore = useAuthStore()
+const {token, isLoggedIn} = storeToRefs(useAuthStore())
 
 const router = useRouter();
 const cards = ['Today', 'Yesterday']
@@ -92,4 +93,12 @@ const logout = () => {
 
   router.push({name: 'login'});
 }
+
+watchEffect(() => {
+  if (!token.value) {
+    router.push({name: 'login'})
+  }
+})
+
+
 </script>

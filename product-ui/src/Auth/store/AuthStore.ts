@@ -1,62 +1,51 @@
-import {defineStore} from 'pinia'
-import {ref, computed} from 'vue'
-import {IUser} from "../model/IUser";
-
-import {API_login} from "../service/authService"
-
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { UserProfile, UserProfile_schema } from "../model/IUser";
+import { UpdateUser } from "../service/authService";
 
 export const useAuthStore = defineStore('AuthStore', () => {
-    // State variables
-    const user = ref<IUser>()
-    const token = ref<string>("")
-    const isLoading = ref<boolean>(false)
-    const error = ref<string | null>(null)
+    const user = ref<UserProfile | null>(null);
+    const isLoading = ref<boolean>(false);
+    const error = ref<string | null>(null);
+    const success = ref<boolean | null>(null);
 
-    const isLoggedIn = computed(() => !!user.value && !!token.value)
-
-
-    const login = async (username: string, password: string) => {
+    const dispatch_UpdateUser = async (userData: UserProfile) => {
         try {
-            isLoading.value = true
-            error.value = null
+            // Reset error and success states
+            error.value = null;
+            success.value = null;
+            isLoading.value = true;
 
-            token.value = await API_login(username, password)
-            user.value = {username, password}
+            // Validate user data
+            UserProfile_schema.parse(userData);
+
+            // Optimistic UI update: Update state before waiting for the response
+            user.value = { ...userData };
+
+            // Call the API to update the user profile
+            const updatedUser = await UpdateUser(userData);
+
+            // On success, update the user state
+            user.value = updatedUser;
+            success.value = true;
         } catch (err) {
-            error.value = err
+            if (err instanceof Error) {
+                // If the error is from the API service, set the error state
+                error.value = err.message || "An unexpected error occurred.";
+            } else {
+                // Handle schema validation errors or other unexpected errors
+                error.value = "Validation failed. Please check your input.";
+            }
         } finally {
-            isLoading.value = false
+            isLoading.value = false;
         }
-
-    }
-    const logout = async () => {
-        token.value = null
-        user.value = null
-
-    }
+    };
 
     return {
         user,
-        token,
         isLoading,
         error,
-        isLoggedIn,
-        login, logout
-    }
-}, {
-    persist: {
-        // key: 'secure-user',
-        enabled: true,
-        // storage: localStorage, // or sessionStorage
-        // paths: ['user '], //select persisted element
-        // serializer: { ///create using pinia crypt snippet
-        //     serialize: value => JSON.stringify(value),
-        //     deserialize: value => JSON.parse(value)
-        // }
-    }
-})
-
-// //HMR (Hot Module Replacement, optional) for dev
-// if (import.meta.hot) {
-//   import.meta.hot.accept(acceptHMRUpdate(useProductStore, import.meta.hot))
-// }
+        success,
+        dispatch_UpdateUser
+    };
+});
