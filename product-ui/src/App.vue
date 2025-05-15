@@ -94,11 +94,6 @@ const logout = () => {
   router.push({name: 'login'});
 }
 
-watchEffect(() => {
-  if (!token.value) {
-    router.push({name: 'login'})
-  }
-})
 
 
 </script>

@@ -13,8 +13,7 @@
 
 <script setup>
 import {ref, computed} from 'vue';
-import {useAuthStore} from '@/store/AuthStore';
-import {UserProfile} from '@/model/IUser';
+import {useAuthStore} from '../store/AuthStore';
 
 const authStore = useAuthStore();
 const {user, isLoading, error, success, dispatch_UpdateUser} = authStore;
@@ -24,7 +23,7 @@ const email = ref(user?.email || '');
 const password = ref(user?.password || '');
 
 const handleSubmit = async () => {
-  const updatedUser: UserProfile = {
+  const updatedUser = {
     id: user?.id,
     username: username.value,
     email: email.value,
