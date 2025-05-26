@@ -1,32 +1,31 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import App from "../App.vue";
-import ProductList from "../product/view/ProductList.vue";
-import EditProduct from "../product/view/EditProduct.vue";
-import NotFound from "../components/NotFound.vue"
-import Login from "../Auth/view/Login.vue"
-import {useRouterGuard} from "./guards"
+import {useRouterGuard} from './guards'
+import NotFound from '../NotFound.vue'
+import UserEdit from '../user/view/UserEdit.vue'
+import UserList from '../user/view/UserList.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
             path: '/',
-            name: 'app',
-            component: App,
-        },
-        {
-            path: '/ProductList',
-            name: 'ProductList',
-            component: ProductList,
+            redirect(to) {
+                return {name: 'userEdit'}
+            }
         }, {
-            path: '/EditProduct',
-            name: 'EditProduct',
-            component: EditProduct,
+            path: '/scheduler',
+            component: () => import('../job_scheduler/scheduler.vue')
+        },
+
+        {
+            path: '/userEdit',
+            name: 'userEdit',
+            component: UserEdit
         },
         {
-            path: '/login',
-            name: 'login',
-            component: Login
+            path: '/user-list',
+            name: 'UserList',
+            component: UserList
         },
         {
             path: '/:pathMatch(.*)*',
@@ -35,7 +34,6 @@ const router = createRouter({
         }
     ]
 })
-
 
 router.beforeEach(useRouterGuard)
 
